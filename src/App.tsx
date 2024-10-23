@@ -29,7 +29,7 @@ function App() {
     }, [currentDate]);
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-pink-100 to-purple-200 p-4">
+        <div className="flex min-h-svh items-center justify-center bg-gradient-to-br from-pink-100 to-purple-200 p-4">
             <div className="w-full max-w-md space-y-8">
                 <CountdownMessage daysUntilAnniversary={daysUntilAnniversary} />
                 <Calendar currentDate={currentDate} daysUntilAnniversary={daysUntilAnniversary} />

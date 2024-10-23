@@ -16,7 +16,7 @@ const Calendar = ({ currentDate }: CalendarProps) => {
         const calendarDays = [];
 
         for (let i = 0; i < firstDayOfMonth; i++) {
-            calendarDays.push(<div key={`empty-${i}`} className="h-[52px]" />);
+            calendarDays.push(<div key={`empty-${i}`} className="size-10" />);
         }
 
         for (let day = 1; day <= daysInMonth; day++) {
@@ -26,7 +26,7 @@ const Calendar = ({ currentDate }: CalendarProps) => {
             calendarDays.push(
                 <motion.div
                     key={day}
-                    className={`flex size-[52px] items-center justify-center rounded-full border border-gray-300 ${
+                    className={`flex size-10 items-center justify-center rounded-full border border-gray-300 ${
                         isAnniversary
                             ? 'bg-pink-200 text-pink-800'
                             : isToday
