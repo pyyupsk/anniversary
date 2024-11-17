@@ -1,1 +1,1 @@
-export const anniversaryDay = 17;
+export const anniversaryDay = 21;

@@ -1,28 +1,15 @@
-import { useState, useEffect } from 'react';
+'use client';
+
+import { useState, useEffect, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import CountdownMessage from './components/CountdownMessage';
 import Calendar from './components/Calendar';
 import { calculateDaysUntilAnniversary, isAnniversaryToday } from './helper/calculate';
 import Confetti from 'react-confetti';
 
-function App() {
+export default function App() {
     const [daysUntilAnniversary, setDaysUntilAnniversary] = useState(0);
-    const [currentDate, setCurrentDate] = useState(new Date());
-    const [currentTime, setCurrentTime] = useState(currentDate.toLocaleTimeString());
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            const newDate = new Date();
-            setCurrentDate(newDate);
-
-            // Convert current time to Bangkok timezone (UTC +7)
-            const bangkokTime = newDate.toLocaleTimeString('en-US', {
-                timeZone: 'Asia/Bangkok', // Set Bangkok timezone
-                hour12: true, // Use 12-hour format with AM/PM
-            });
-            setCurrentTime(bangkokTime);
-        }, 1000);
-        return () => clearInterval(timer);
-    }, []);
+    const currentDate = useMemo(() => new Date(), []);
 
     useEffect(() => {
         const days = calculateDaysUntilAnniversary(currentDate);
@@ -30,18 +17,20 @@ function App() {
     }, [currentDate]);
 
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-pink-100 to-purple-200 p-4">
-            <div className="w-full max-w-md space-y-8">
-                {isAnniversaryToday(currentDate) && <Confetti recycle={false} />}
+        <div className="grid min-h-screen place-items-center bg-gradient-to-br from-pink-100 via-purple-200 to-blue-100">
+            {isAnniversaryToday(currentDate) && <Confetti recycle={false} />}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+                className="container mx-auto max-w-md space-y-8"
+            >
                 <CountdownMessage
                     currentDate={currentDate}
                     daysUntilAnniversary={daysUntilAnniversary}
-                    currentTime={currentTime}
                 />
                 <Calendar currentDate={currentDate} daysUntilAnniversary={daysUntilAnniversary} />
-            </div>
+            </motion.div>
         </div>
     );
 }
-
-export default App;
