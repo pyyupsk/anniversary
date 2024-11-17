@@ -1,11 +1,20 @@
 import { Heart } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { calculateAnniversaryYearsAndMonths, isAnniversaryToday } from '../helper/calculate';
 
 interface CountdownMessageProps {
+    currentDate: Date;
     daysUntilAnniversary: number;
+    currentTime: string;
 }
 
-const CountdownMessage = ({ daysUntilAnniversary }: CountdownMessageProps) => {
+const CountdownMessage = ({
+    currentDate,
+    daysUntilAnniversary,
+    currentTime,
+}: CountdownMessageProps) => {
+    const { years, months } = calculateAnniversaryYearsAndMonths(currentDate);
+
     return (
         <motion.div
             initial={{ scale: 0 }}
@@ -22,9 +31,13 @@ const CountdownMessage = ({ daysUntilAnniversary }: CountdownMessageProps) => {
                 <Heart className="h-full w-full text-pink-500" />
             </motion.div>
             <p className="mb-4 text-xl">
-                {daysUntilAnniversary === 0
+                {isAnniversaryToday(currentDate)
                     ? 'Happy Anniversary! 🎉'
                     : `${daysUntilAnniversary} ${daysUntilAnniversary === 1 ? 'day' : 'days'} until our special day!`}
+            </p>
+            <p className="mt-4 text-lg">Current time in Bangkok: {currentTime}</p>
+            <p className="mt-4 text-lg">
+                We've been together for {years} years and {months} months! 🎉
             </p>
         </motion.div>
     );

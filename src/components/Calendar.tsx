@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { anniversaryDay } from '../constants';
 
 interface CalendarProps {
     currentDate: Date;
@@ -15,13 +16,15 @@ const Calendar = ({ currentDate }: CalendarProps) => {
         const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
         const calendarDays = [];
 
+        // Empty spaces before the first day of the month
         for (let i = 0; i < firstDayOfMonth; i++) {
             calendarDays.push(<div key={`empty-${i}`} className="size-10" />);
         }
 
+        // Render actual days of the month
         for (let day = 1; day <= daysInMonth; day++) {
             const isToday = day === currentDate.getDate();
-            const isAnniversary = day === 21;
+            const isAnniversary = day === anniversaryDay;
 
             calendarDays.push(
                 <motion.div

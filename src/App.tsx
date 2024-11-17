@@ -1,37 +1,43 @@
 import { useState, useEffect } from 'react';
 import CountdownMessage from './components/CountdownMessage';
 import Calendar from './components/Calendar';
+import { calculateDaysUntilAnniversary, isAnniversaryToday } from './helper/calculate';
+import Confetti from 'react-confetti';
 
 function App() {
     const [daysUntilAnniversary, setDaysUntilAnniversary] = useState(0);
     const [currentDate, setCurrentDate] = useState(new Date());
+    const [currentTime, setCurrentTime] = useState(currentDate.toLocaleTimeString());
 
     useEffect(() => {
         const timer = setInterval(() => {
-            setCurrentDate(new Date());
-        }, 1000);
+            const newDate = new Date();
+            setCurrentDate(newDate);
 
+            // Convert current time to Bangkok timezone (UTC +7)
+            const bangkokTime = newDate.toLocaleTimeString('en-US', {
+                timeZone: 'Asia/Bangkok', // Set Bangkok timezone
+                hour12: true, // Use 12-hour format with AM/PM
+            });
+            setCurrentTime(bangkokTime);
+        }, 1000);
         return () => clearInterval(timer);
     }, []);
 
     useEffect(() => {
-        const calculateCountdown = () => {
-            const anniversaryDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 21);
-            if (currentDate > anniversaryDate) {
-                anniversaryDate.setMonth(anniversaryDate.getMonth() + 1);
-            }
-            const timeDiff = anniversaryDate.getTime() - currentDate.getTime();
-            const daysLeft = Math.ceil(timeDiff / (1000 * 3600 * 24));
-            setDaysUntilAnniversary(daysLeft);
-        };
-
-        calculateCountdown();
+        const days = calculateDaysUntilAnniversary(currentDate);
+        setDaysUntilAnniversary(days);
     }, [currentDate]);
 
     return (
-        <div className="flex min-h-svh items-center justify-center bg-gradient-to-br from-pink-100 to-purple-200 p-4">
+        <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-pink-100 to-purple-200 p-4">
             <div className="w-full max-w-md space-y-8">
-                <CountdownMessage daysUntilAnniversary={daysUntilAnniversary} />
+                {isAnniversaryToday(currentDate) && <Confetti recycle={false} />}
+                <CountdownMessage
+                    currentDate={currentDate}
+                    daysUntilAnniversary={daysUntilAnniversary}
+                    currentTime={currentTime}
+                />
                 <Calendar currentDate={currentDate} daysUntilAnniversary={daysUntilAnniversary} />
             </div>
         </div>
