@@ -48,7 +48,8 @@ export default function CountdownMessage({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.6 }}
                 >
-                    We've been together for {years} years and {months} months! 🎉
+                    We've been together for {years !== 0 && `${years} years`} and{' '}
+                    {months !== 0 && `${months} months`}! 🎉
                 </motion.p>
             </CardContent>
         </Card>

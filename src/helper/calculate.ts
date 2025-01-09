@@ -16,7 +16,7 @@ export const calculateAnniversaryYearsAndMonths = (
     currentDate: Date,
 ): { years: number; months: number } => {
     const startYear = 2024;
-    const startMonth = 2;
+    const startMonth = 3;
 
     const currentYear = currentDate.getFullYear();
     const currentMonth = currentDate.getMonth();
