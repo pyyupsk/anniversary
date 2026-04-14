@@ -1,46 +1,28 @@
-# 💖 Anniversary Countdown App
+# anniversary
 
-Welcome to the **Anniversary Countdown App**! 🎉 This app is a heartfelt project
-designed to celebrate special moments with my girlfriends by counting the days
-until our anniversary each month.
+A personal monthly anniversary countdown — dark romantic UI, floating hearts, built with Vue 3 + Tailwind CSS v4.
 
-![Anniversary Countdown](.github/assets/preview.png)
+## Features
 
-## 🚀 Features
+- Counts down to the 21st of each month
+- Switches to a celebration view with floating particles on anniversary day
+- Self-hosted fonts via Fontsource (no Google Fonts API calls)
+- Auto-imports via `unplugin-auto-import` + `unplugin-vue-components`
 
-- **Countdown Timer**: Displays the number of days until your anniversary.
-- **Interactive Calendar**: Shows the current month with your anniversary date
-  highlighted.
-- **Beautiful UI**: A lovely design that enhances your romantic experience.
-- **Real-time Updates**: Automatically updates every second to keep the
-  countdown accurate.
+## Stack
 
-## 📦 Installation
+- [Vue 3](https://vuejs.org/) + TypeScript
+- [Vite 8](https://vite.dev/)
+- [Tailwind CSS v4](https://tailwindcss.com/)
+- [@pyyupsk/fdu](https://github.com/pyyupsk/fdu) — ultra-fast date-time library
 
-To set up the Anniversary Countdown App, follow these simple steps:
+## Development
 
-1. **Clone the repository**:
+```bash
+bun install
+bun dev
+```
 
-   ```bash
-   git clone https://github.com/pyyupsk/anniversary.git
-   cd anniversary
-   ```
+## License
 
-2. **Install the dependencies**:
-
-   ```bash
-   npm install
-   ```
-
-3. **Run the application**:
-
-   ```bash
-   npm dev
-   ```
-
-   Your app will be available at `http://localhost:5173/anniversary/`.
-
-## 📜 License
-
-This project is for personal use and does not have a specific license. Feel free
-to use the code as you wish!
+MIT

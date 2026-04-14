@@ -1,0 +1,84 @@
+@import '@fontsource/cormorant-garamond/300.css';
+@import '@fontsource/cormorant-garamond/300-italic.css';
+@import '@fontsource/cormorant-garamond/400.css';
+@import '@fontsource/cormorant-garamond/400-italic.css';
+@import '@fontsource/cormorant-garamond/600.css';
+@import '@fontsource/cormorant-garamond/600-italic.css';
+@import '@fontsource/dm-mono/300.css';
+@import '@fontsource/dm-mono/400.css';
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-code: 'DM Mono', 'Courier New', monospace;
+
+  --color-ink: #07070f;
+  --color-cream: #f5efe6;
+  --color-rose-glow: #f43f5e;
+  --color-amber-glow: #f59e0b;
+
+  --animate-fade-up: fade-up 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  --animate-glow: glow-pulse 6s ease-in-out infinite;
+  --animate-tick: tick 1s ease-in-out infinite;
+  --animate-float: float-up 5s ease-in-out infinite backwards;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes tick {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @keyframes float-up {
+    0% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    85% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(-100vh) translateX(var(--drift, 20px)) scale(0.6);
+      opacity: 0;
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      opacity: 0.07;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.13;
+      transform: scale(1.08);
+    }
+  }
+}
+
+@utility grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
