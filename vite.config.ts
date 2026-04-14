@@ -6,6 +6,7 @@ import components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 
 export default defineConfig({
+  base: '/anniversary/',
   plugins: [
     tailwindcss(),
     vue(),
