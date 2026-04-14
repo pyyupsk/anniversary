@@ -1,4 +1,5 @@
 import { fdu } from '@pyyupsk/fdu'
+import { computed, onUnmounted, ref, shallowRef, watch } from 'vue'
 
 const ANNIVERSARY_DAY = 21
 
